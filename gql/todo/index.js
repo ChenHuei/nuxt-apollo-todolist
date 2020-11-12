@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 
-export const GET_USERS = gql`
+export const GET_LIST = gql`
   query {
-    users {
-      name
+    list {
+      title
     }
   }
 `

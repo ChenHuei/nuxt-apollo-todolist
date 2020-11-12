@@ -1,20 +1,17 @@
 <template>
-  <div class="container">
-    <Logo />
-    <h1 class="title">nuxt-apollo-typescript</h1>
-    <div class="links">
-      {{ users }}
-    </div>
+  <div class="main">
+    <h1 class="main-title">nuxt-apollo-typescript</h1>
+    {{ list }}
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { GET_USERS } from '@/gql/user'
+import { GET_LIST } from '@/gql/todo'
 
 @Component({
   apollo: {
-    users: GET_USERS,
+    list: GET_LIST,
   },
 })
 export default class IndexPage extends Vue {
@@ -25,10 +22,10 @@ export default class IndexPage extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.container {
-  @include size(100%, auto);
+.main {
+  @include size(100%);
   @include display-flex();
 
-  color: var(--primary);
+  flex-direction: columm;
 }
 </style>
