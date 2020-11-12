@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
+    "@nuxtjs/apollo": "^4.0.1-rc.4",
     "@nuxtjs/axios": "^5.12.2",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "graphql-tag": "^2.11.0",
     "nuxt": "^2.14.6"
   },
   "devDependencies": {
@@ -39,6 +41,7 @@
     "stylelint": "^13.7.2",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^4.1.0",
     "ts-jest": "^26.4.1",
     "vue-jest": "^3.0.4"
   }
