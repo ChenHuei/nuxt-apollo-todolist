@@ -11,7 +11,11 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: ['element-ui/lib/theme-chalk/index.css'],
+  css: [
+    { src: 'normalize.css', lang: 'css' },
+    { src: 'element-ui/lib/theme-chalk/index.css', lang: 'css' },
+    { src: '@/assets/styles/app.scss', lang: 'scss' },
+  ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: ['@/plugins/element-ui'],
@@ -31,7 +35,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/apollo'
+    '@nuxtjs/style-resources',
+    '@nuxtjs/apollo',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -42,11 +47,18 @@ export default {
     transpile: [/^element-ui/],
   },
 
+  styleResources: {
+    scss: ['@/assets/styles/_base.scss'],
+  },
+  stylelint: {
+    fix: true,
+  },
+
   apollo: {
     clientConfigs: {
       default: {
         httpEndpoint: 'http://localhost:4000',
-      }
-    }
-  }
+      },
+    },
+  },
 }

@@ -1,32 +1,34 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">nuxt-typescript-apollo</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+    <Logo />
+    <h1 class="title">nuxt-apollo-typescript</h1>
+    <div class="links">
+      {{ users }}
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { Component, Vue } from 'vue-property-decorator'
+import { GET_USERS } from '@/gql/user'
 
-export default Vue.extend({})
+@Component({
+  apollo: {
+    users: GET_USERS,
+  },
+})
+export default class IndexPage extends Vue {
+  mounted() {
+    console.log(this.$apollo)
+  }
+}
 </script>
+
+<style lang="scss" scoped>
+.container {
+  @include size(100%, auto);
+  @include display-flex();
+
+  color: var(--primary);
+}
+</style>
