@@ -1,22 +1,41 @@
 <template>
   <div class="main">
-    <h1 class="main-title">nuxt-apollo-typescript</h1>
-    {{ list }}
+    <Header v-model="title" title="VIDEO LIST" @enter="enterHandler" />
+    <List :list="videos" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { GET_LIST } from '@/gql/todo'
+
+// gql
+import { GET_VIDEOS, POST_VIDEO } from '@/gql/videos'
+
+// components
+import Header from '@/components/project/Header.vue'
+import List from '@/components/project/List.vue'
 
 @Component({
+  components: { Header, List },
   apollo: {
-    list: GET_LIST,
+    videos: GET_VIDEOS,
   },
 })
 export default class IndexPage extends Vue {
-  mounted() {
-    console.log(this.$apollo)
+  title = ''
+
+  enterHandler(): void {
+    this.$apollo
+      .mutate({
+        mutation: POST_VIDEO,
+        variables: {
+          title: this.title,
+        },
+      })
+      .then(() => {
+        this.title = ''
+        this.$apollo.queries.videos.refetch()
+      })
   }
 }
 </script>
@@ -26,6 +45,6 @@ export default class IndexPage extends Vue {
   @include size(100%);
   @include display-flex();
 
-  flex-direction: columm;
+  flex-direction: column;
 }
 </style>
