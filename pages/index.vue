@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <Header v-model="title" title="VIDEO LIST" @enter="enterHandler" />
-    <List :list="videos" />
+    <List :list="videos" @delete="deleteHandler" />
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 // gql
-import { GET_VIDEOS, POST_VIDEO } from '@/gql/videos'
+import { GET_VIDEOS, POST_VIDEO, DELETE_VIDEO } from '@/gql/videos'
 
 // components
 import Header from '@/components/project/Header.vue'
@@ -34,6 +34,19 @@ export default class IndexPage extends Vue {
       })
       .then(() => {
         this.title = ''
+        this.$apollo.queries.videos.refetch()
+      })
+  }
+
+  deleteHandler(id: number): void {
+    this.$apollo
+      .mutate({
+        mutation: DELETE_VIDEO,
+        variables: {
+          id,
+        },
+      })
+      .then(() => {
         this.$apollo.queries.videos.refetch()
       })
   }

@@ -4,7 +4,7 @@
       <basic-text level="h5" class="card-title">{{ title }}</basic-text>
       <card-description v-bind="author" :views="views" />
     </div>
-    <div class="card-delete">X</div>
+    <div class="card-delete" @click="$emit('delete', id)">X</div>
   </div>
 </template>
 
@@ -21,6 +21,9 @@ import CardDescription from './card/Description.vue'
   components: { CardDescription },
 })
 export default class Card extends Vue {
+  @Prop()
+  id: number | undefined
+
   @Prop()
   title: string | undefined
 

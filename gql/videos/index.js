@@ -19,8 +19,12 @@ export const POST_VIDEO = gql`
     post(title: $title) {
       id
       title
-      views
-      author
     }
+  }
+`
+
+export const DELETE_VIDEO = gql`
+  mutation($id: Int!) {
+    delete(id: $id)
   }
 `
